@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Diner.MainPage" BackgroundColor="{StaticResource Primary}">
+        <VerticalStackLayout
+            VerticalOptions="Start"
+            Spacing="80">
+            <VerticalStackLayout
+                Padding="0,40,0,0"
+                Spacing="0">
+            <Label
+                Text="Diner"
+                FontSize="50"
+                FontAttributes="Bold"
+                HorizontalOptions="Center" />
+
+            <Label
+                Text="Collect and share restaurant experiences"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
+                FontSize="14"
+                HorizontalOptions="Center" />
+            </VerticalStackLayout>
+            <Button
+                x:Name="CounterBtn"
+                Text="Login"
+                TextColor="{StaticResource Tertiary}"
+                SemanticProperties.Hint="Counts the number of times you click"
+                Clicked="OnCounterClicked"
+                HorizontalOptions="Center"
+                BackgroundColor="{StaticResource Secondary}"/>
+
+        </VerticalStackLayout>
+</ContentPage>
+
