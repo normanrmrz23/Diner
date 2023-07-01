@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Diner.Views.ProfilePage"
+             Title="Profile"
+             BackgroundColor="{StaticResource Secondary}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20*"></RowDefinition>
+            <RowDefinition Height="80*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <HorizontalStackLayout Spacing="40" Grid.Row="0">
+            <Frame HeightRequest="140"
+                   WidthRequest="140"
+                   CornerRadius="70"
+                   HorizontalOptions="Center"
+                   IsClippedToBounds="True"
+                   Padding="0"
+                   BorderColor="Gray"
+                   Margin="0,0,0,0">
+
+                <Image
+                    Aspect="AspectFit"
+                    Source="addi.png"
+                    SemanticProperties.Description="Cute dot net bot waving hi to you!"
+                    HeightRequest="200"
+                    WidthRequest="200"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center" />
+            </Frame>
+            <VerticalStackLayout VerticalOptions="Center">
+                <Label FontSize="30" FontAttributes="Bold" Text="Addison Hollensed" VerticalOptions="Center" />
+                <Label FontSize="18" Text="Los Angeles, California" VerticalOptions="End" />
+            </VerticalStackLayout>
+        </HorizontalStackLayout>
+        <Grid Grid.Row="1" RowSpacing="10" ColumnSpacing="10" Padding="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20*"></RowDefinition>
+                <RowDefinition Height="20*"></RowDefinition>
+                <RowDefinition Height="60*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*"></ColumnDefinition>
+                <ColumnDefinition Width="50*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Text="Offers"  Grid.Row="0" Grid.Column="0" Command="{Binding ShowMoreInfoCommand}"/>
+            <Button Text="Your Lists" Grid.Row="0" Grid.Column="1" Command="{Binding ShowMoreInfoCommand}"/>
+            <Button Text="Reservations" Grid.Row="1" Grid.Column="0" Command="{Binding ShowMoreInfoCommand}"/>
+            <Button Text="Logs" Grid.Row="1" Grid.Column="1" Command="{Binding ShowMoreInfoCommand}"/>
+
+        </Grid>
+    </Grid>
+</ContentPage>

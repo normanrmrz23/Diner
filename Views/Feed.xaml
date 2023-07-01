@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:Diner.ViewModels"
+             x:Class="Diner.Views.Feed"
+             Title="Feed"
+             Background="{StaticResource Secondary}">
+
+    <ContentPage.BindingContext>
+        <viewModels:FeedViewModel/>
+    </ContentPage.BindingContext>
+    <RefreshView IsRefreshing="{Binding IsRefreshing.Value}"
+                 Command="{Binding RefreshCommand}">
+            <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="95*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="85*"/>
+        </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Grid.Column="0" ColumnSpacing="10" Padding="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="70*"/>
+                <ColumnDefinition Width="20*"/>
+            </Grid.ColumnDefinitions>
+            <Entry Text="{Binding SearchTerm.Value}" Placeholder="Search..." ReturnCommand="{Binding RefreshCommand}" Grid.Column="0" BackgroundColor="White"/>
+            <Button Text="Search" Grid.Column="1" Command="{Binding RefreshCommand}"/>
+            </Grid>
+            <CollectionView x:Name="listCollection"
+                    ItemsSource="{Binding Businesses}"
+                        Margin="20"
+                            Grid.Row="1"
+                            Grid.Column="0"
+                        SelectionMode="Single"
+                        SelectionChangedCommand="{Binding SelectNoteCommand}"
+                        SelectionChangedCommandParameter="{Binding Source={RelativeSource Self}, Path=SelectedItem}">
+
+
+
+
+        <!-- Designate how the collection of items are laid out -->
+        <CollectionView.ItemsLayout>
+            <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+        </CollectionView.ItemsLayout>
+
+        <!-- Define the appearance of each item in the list -->
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <Frame CornerRadius="20">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50*"></ColumnDefinition>
+                            <ColumnDefinition Width="15*"></ColumnDefinition>
+                            <ColumnDefinition Width="15*"></ColumnDefinition>
+                            <ColumnDefinition Width="15*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                    <Label Text="{Binding Name}" Grid.Column="0" FontSize="22" FontAttributes="Bold"/>
+                    <HorizontalStackLayout Spacing="5" Grid.Column="1">
+                        <Label Text="Rating:" FontSize="14" VerticalOptions="Center"/>
+                        <Label Text="{Binding Rating}" FontSize="14" VerticalOptions="Center"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="5" Grid.Column="2">
+                        <Label Text="Reviews:" FontSize="14" VerticalOptions="Center"/>
+                        <Label Text="{Binding ReviewCount}" FontSize="14" VerticalOptions="Center"/>
+                    </HorizontalStackLayout>
+                    <!--
+                    <HorizontalStackLayout Spacing="5">
+                        <Label Text="Price:" FontSize="14" VerticalOptions="Center"/>
+                        <Label Text="{Binding Price}" FontSize="14" VerticalOptions="Center"/>
+                    </HorizontalStackLayout>
+                    -->
+                    <ImageButton Source="plus_solid.png" Command="{Binding AddToListCommand}" Grid.Column="3" HeightRequest="40" WidthRequest="40" HorizontalOptions="End"/>
+                    </Grid>
+                </Frame>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+    </Grid>
+    </RefreshView>
+</ContentPage>

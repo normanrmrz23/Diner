@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Diner.Views.BusinessPage"
+             xmlns:viewModels="clr-namespace:Diner.ViewModels"
+             Title="BusinessPage"
+             BackgroundColor="{StaticResource Secondary}">
+    <ContentPage.BindingContext>
+        <viewModels:BusinessPageViewModel/>
+    </ContentPage.BindingContext>
+    <ScrollView>
+    <VerticalStackLayout Spacing="10">
+        <Image
+            Source="{Binding ImageUrl.Value}"
+            VerticalOptions="Center" 
+            HorizontalOptions="FillAndExpand"
+            HeightRequest="400"/>
+        <Label 
+            Text="{Binding Name.Value}"
+            FontSize="50"
+            FontAttributes="Bold"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+        <Label Text="Phone: " FontSize="Large"/>
+        <Label Text="{Binding Phone.Value}" FontSize="Large"/>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+        <Label Text="Rating: " FontSize="Large"/>
+        <Label Text="{Binding Rating.Value}" FontSize="Large"/>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+        <Label Text="Distance: " FontSize="Large"/>
+        <Label Text="{Binding DistanceAway.Value}" FontSize="Large"/>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+        <Label Text="Open: " FontSize="Large"/>
+        <Label Text="{Binding IsClosed.Value}" FontSize="Large"/>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+        <Button Text="Website" Command="{Binding OpenWebsiteCommand}"/>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

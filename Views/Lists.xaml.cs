@@ -1,9 +1,10 @@
-﻿namespace Diner;
+﻿namespace Diner.Views;
 
 public partial class Lists : ContentPage
 {
-	public Lists()
+    public Lists()
 	{
 		InitializeComponent();
-	}
+    }
+
 }

@@ -1,4 +1,4 @@
-﻿namespace Diner;
+﻿namespace Diner.Views;
 
 public partial class Feed : ContentPage
 {
