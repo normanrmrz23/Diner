@@ -15,7 +15,7 @@ namespace Diner.ViewModels
         public AsyncReactiveCommand SelectNoteCommand { get; } = new();
         public ReactiveProperty<string> SearchTerm { get; set; } = new();
         public AsyncReactiveCommand AddToListCommand { get; set; } = new();
-
+        public Location UserLocation { get; set; } = new();
         public FeedViewModel()
 		{
             RefreshCommand.Subscribe(async _ => await FindAsync());
@@ -33,8 +33,9 @@ namespace Diner.ViewModels
             IsRefreshing.Value = true;
             Businesses.Clear();
             var request = new Yelp.Api.Models.SearchRequest();
-            request.Latitude = 34.0211;
-            request.Longitude = -118.415016;
+            await GetCurrentLocation();
+            request.Latitude = UserLocation.Latitude;
+            request.Longitude = UserLocation.Longitude;
             request.Term = SearchTerm.Value;
             request.MaxResults = 15;
 
@@ -53,6 +54,73 @@ namespace Diner.ViewModels
                 { "business", business }
             };
             await Shell.Current.GoToAsync($"{nameof(Views.BusinessPage)}", navigationParameter);
+        }
+
+        public async Task<string> GetCachedLocation()
+        {
+            try
+            {
+                Location location = await Geolocation.Default.GetLastKnownLocationAsync();
+
+                if (location != null)
+                    return $"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}";
+            }
+            catch (FeatureNotSupportedException fnsEx)
+            {
+                // Handle not supported on device exception
+            }
+            catch (FeatureNotEnabledException fneEx)
+            {
+                // Handle not enabled on device exception
+            }
+            catch (PermissionException pEx)
+            {
+                // Handle permission exception
+            }
+            catch (Exception ex)
+            {
+                // Unable to get location
+            }
+
+            return "None";
+        }
+
+        private CancellationTokenSource _cancelTokenSource;
+        private bool _isCheckingLocation;
+
+        public async Task GetCurrentLocation()
+        {
+            try
+            {
+                _isCheckingLocation = true;
+
+                GeolocationRequest request = new GeolocationRequest(GeolocationAccuracy.Medium, TimeSpan.FromSeconds(10));
+
+                _cancelTokenSource = new CancellationTokenSource();
+
+                UserLocation = await Geolocation.Default.GetLocationAsync(request, _cancelTokenSource.Token);
+
+                if (UserLocation != null)
+                    Console.WriteLine($"Latitude: {UserLocation.Latitude}, Longitude: {UserLocation.Longitude}, Altitude: {UserLocation.Altitude}");
+            }
+            // Catch one of the following exceptions:
+            //   FeatureNotSupportedException
+            //   FeatureNotEnabledException
+            //   PermissionException
+            catch (Exception ex)
+            {
+                // Unable to get location
+            }
+            finally
+            {
+                _isCheckingLocation = false;
+            }
+        }
+
+        public void CancelRequest()
+        {
+            if (_isCheckingLocation && _cancelTokenSource != null && _cancelTokenSource.IsCancellationRequested == false)
+                _cancelTokenSource.Cancel();
         }
     }
 }

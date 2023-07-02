@@ -33,9 +33,9 @@
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-ios|AnyCPU'">
 	  <CreatePackage>false</CreatePackage>
 	  <MtouchInterpreter>all</MtouchInterpreter>
-	  <MtouchLink>SdkOnly</MtouchLink>
-	  <CodesignProvision>iOS Team Provisioning Profile: *</CodesignProvision>
-	  <CodesignKey>iPhone Developer</CodesignKey>
+	  <MtouchLink>None</MtouchLink>
+	  <CodesignProvision>Norman Diner Profile</CodesignProvision>
+	  <CodesignKey>Apple Development: normanrmrz@me.com (H8VF9L3V8C)</CodesignKey>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-ios|AnyCPU'">
 	  <CreatePackage>false</CreatePackage>

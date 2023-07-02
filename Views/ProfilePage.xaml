@@ -10,9 +10,17 @@
             <RowDefinition Height="80*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <HorizontalStackLayout Spacing="40" Grid.Row="0">
-            <Frame HeightRequest="140"
-                   WidthRequest="140"
+        <Grid Grid.Row="0" ColumnSpacing="10">
+            <Grid.RowDefinitions>
+
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30*"></ColumnDefinition>
+                <ColumnDefinition Width="70*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Frame Grid.Column="0"
+                   HeightRequest="120"
+                   WidthRequest="120"
                    CornerRadius="70"
                    HorizontalOptions="Center"
                    IsClippedToBounds="True"
@@ -21,6 +29,7 @@
                    Margin="0,0,0,0">
 
                 <Image
+                    Grid.Column="0"
                     Aspect="AspectFit"
                     Source="addi.png"
                     SemanticProperties.Description="Cute dot net bot waving hi to you!"
@@ -29,11 +38,11 @@
                     VerticalOptions="Center"
                     HorizontalOptions="Center" />
             </Frame>
-            <VerticalStackLayout VerticalOptions="Center">
-                <Label FontSize="30" FontAttributes="Bold" Text="Addison Hollensed" VerticalOptions="Center" />
+            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                <Label FontSize="28" FontAttributes="Bold" Text="Addison Hollensed" VerticalOptions="Center" />
                 <Label FontSize="18" Text="Los Angeles, California" VerticalOptions="End" />
             </VerticalStackLayout>
-        </HorizontalStackLayout>
+            </Grid>
         <Grid Grid.Row="1" RowSpacing="10" ColumnSpacing="10" Padding="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="20*"></RowDefinition>
