@@ -6,4 +6,9 @@ public partial class Feed : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    private void ContentPage_NavigatedTo(object sender, NavigatedToEventArgs e)
+    {
+        listCollection.SelectedItem = null;
+    }
 }

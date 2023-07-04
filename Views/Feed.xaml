@@ -48,7 +48,7 @@
         <CollectionView.ItemTemplate>
             <DataTemplate>
                 <Frame CornerRadius="20">
-                    <Grid>
+                    <Grid HeightRequest="40">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="50*"></ColumnDefinition>
                             <ColumnDefinition Width="15*"></ColumnDefinition>
