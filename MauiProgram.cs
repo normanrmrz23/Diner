@@ -1,5 +1,4 @@
-﻿using Diner.Services;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 
 namespace Diner;
 
@@ -14,8 +13,15 @@ public static class MauiProgram
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-			});
-        //builder.Services.AddSingleton<IAlertService, AlertService>();
+				fonts.AddFont("Alta_regular.otf", "AltaRegular");
+                fonts.AddFont("Alta_light.otf", "AltaLight");
+                fonts.AddFont("Alta_caption.otf", "AltaCaption");
+				fonts.AddFont("calibri.ttf", "Calibri");
+				fonts.AddFont("fa-regular.otf", "FontAwesome");
+				fonts.AddFont("fa-solid-900.otf", "FontAwesomeSolid");
+                fonts.AddFont("MaterialIcons-Regular.ttf", "MaterialIcons");
+            });
+        builder.Services.AddSingleton<IAlertService, AlertService>();
 
 
 #if DEBUG

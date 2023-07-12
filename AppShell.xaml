@@ -8,25 +8,20 @@
 
     <TabBar>
         <ShellContent
-            Title="Home"
             ContentTemplate="{DataTemplate views:HomePage}"
-            Icon="{OnPlatform 'house_solid.png', iOS='icon_notes_ios.png', MacCatalyst='icon_notes_ios.png'}" />
+            Icon="house_solid.png"/>
         <ShellContent
-            Title="Feed"
-            ContentTemplate="{DataTemplate views:Feed}"
-            Icon="{OnPlatform 'icon_notes.png', iOS='icon_notes_ios.png', MacCatalyst='icon_notes_ios.png'}" />
-                <ShellContent
-            Title="Your Lists"
-            ContentTemplate="{DataTemplate views:AllLists}"
-            Icon="{OnPlatform 'icon_notes.png', iOS='icon_notes_ios.png', MacCatalyst='icon_notes_ios.png'}" />
-        <ShellContent
-            Title="About"
             ContentTemplate="{DataTemplate views:AboutPage}"
-            Icon="{OnPlatform 'icon_about.png', iOS='icon_about_ios.png', MacCatalyst='icon_about_ios.png'}" />
+            Icon="utensils_solid.png" />
         <ShellContent
-            Title="Profile"
+            ContentTemplate="{DataTemplate views:Search}"
+            Icon="magnifying_glass_solid"/>
+        <ShellContent
+            ContentTemplate="{DataTemplate views:AllLists}"
+            Icon="list_solid.png" />
+        <ShellContent
             ContentTemplate="{DataTemplate views:ProfilePage}"
-            Icon="{OnPlatform 'user_solid.png', iOS='icon_about_ios.png', MacCatalyst='icon_about_ios.png'}" />
+            Icon="user_solid.png" />
     </TabBar>
 
 </Shell>

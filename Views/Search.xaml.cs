@@ -1,14 +1,15 @@
 ﻿namespace Diner.Views;
 
-public partial class Feed : ContentPage
+public partial class Search : ContentPage
 {
-	public Feed()
+	public Search()
 	{
 		InitializeComponent();
 	}
 
     private void ContentPage_NavigatedTo(object sender, NavigatedToEventArgs e)
     {
-        listCollection.SelectedItem = null;
+        businessCollection.SelectedItem = null;
     }
+
 }

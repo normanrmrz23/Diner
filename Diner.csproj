@@ -91,6 +91,18 @@
 	  <None Remove="Controls\" />
 	  <None Remove="Resources\AppIcon\256.png" />
 	  <None Remove="Resources\AppIcon\appicon.png" />
+	  <None Remove="Resources\Fonts\Alta_regular.otf" />
+	  <None Remove="Resources\Fonts\Alta_light.otf" />
+	  <None Remove="Resources\Fonts\Alta_caption.otf" />
+	  <None Remove="Resources\Images\magnifying-glass-solid-2.svg" />
+	  <None Remove="Resources\Images\utensils-solid-2.svg" />
+	  <None Remove="Resources\Fonts\calibri.ttf" />
+	  <None Remove="Resources\Images\magnifying_glass_solid.svg" />
+	  <None Remove="Resources\Images\utensils_solid.svg" />
+	  <None Remove="Resources\AppIcon\.DS_Store" />
+	  <None Remove="Resources\Styles\EmptyXmlFile.xml" />
+	  <None Remove="Resources\Fonts\Font Awesome 6 Brands-Regular-400.otf" />
+	  <None Remove="Resources\Fonts\Font Awesome 6 Free-Solid-900.otf" />
 	</ItemGroup>
 	<ItemGroup>
 	  <BundleResource Include="Resources\Images\icon_about.png" />
@@ -110,9 +122,19 @@
 	  <BundleResource Include="Resources\Images\list_solid.svg" />
 	  <BundleResource Include="Resources\Images\tag_solid.svg" />
 	  <BundleResource Include="Resources\Images\calendar_check_solid.svg" />
-	  <BundleResource Include="Resources\Fonts\fa-regular-400.ttf" />
-	  <BundleResource Include="Resources\Fonts\fa-solid-900.ttf" />
 	  <BundleResource Include="Resources\Fonts\MaterialIcons-Regular.ttf" />
+	  <BundleResource Include="Resources\Fonts\Alta_regular.otf" />
+	  <BundleResource Include="Resources\Fonts\Alta_light.otf" />
+	  <BundleResource Include="Resources\Fonts\Alta_caption.otf" />
+	  <BundleResource Include="Resources\Images\magnifying_glass_solid.svg" />
+	  <BundleResource Include="Resources\Images\utensils_solid.svg" />
+	  <BundleResource Include="Resources\Fonts\calibri.ttf" />
+	  <BundleResource Include="Resources\Images\magnifying_glass_solid.svg" />
+	  <BundleResource Include="Resources\Images\utensils_solid.svg" />
+	  <BundleResource Include="Resources\AppIcon\.DS_Store" />
+	  <BundleResource Include="Resources\Styles\Icons.xaml" />
+	  <BundleResource Include="Resources\Fonts\fa-regular-400.otf" />
+	  <BundleResource Include="Resources\Fonts\fa-solid-900.otf" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Views\" />

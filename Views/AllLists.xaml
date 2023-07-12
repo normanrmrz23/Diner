@@ -4,7 +4,8 @@
              xmlns:viewModels="clr-namespace:Diner.ViewModels"
              x:Class="Diner.Views.AllLists"
              Title="Your Lists"
-             NavigatedTo="ContentPage_NavigatedTo">
+             NavigatedTo="ContentPage_NavigatedTo"
+             BackgroundColor="{StaticResource Primary}">
 
     <ContentPage.BindingContext>
         <viewModels:AllListsViewModel />

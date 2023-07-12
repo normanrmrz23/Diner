@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Diner.Views.Lists"
              xmlns:viewModels="clr-namespace:Diner.ViewModels"
-             Title="List">
+             Title="List"
+             BackgroundColor="{StaticResource Primary}">
     <ContentPage.BindingContext>
         <viewModels:ListsViewModel/>
     </ContentPage.BindingContext>

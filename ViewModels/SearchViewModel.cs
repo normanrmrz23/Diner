@@ -7,25 +7,25 @@ using Yelp.Api;
 
 namespace Diner.ViewModels
 {
-	public class FeedViewModel
+	public class SearchViewModel
 	{
         public ReactiveCollection<Yelp.Api.Models.BusinessResponse> Businesses { get; } = new();
         public AsyncReactiveCommand RefreshCommand { get; } = new();
         public ReactiveProperty<bool> IsRefreshing { get; set; } = new();
-        public AsyncReactiveCommand SelectNoteCommand { get; } = new();
+        public AsyncReactiveCommand SelectBusinessCommand { get; } = new();
         public ReactiveProperty<string> SearchTerm { get; set; } = new();
         public AsyncReactiveCommand AddToListCommand { get; set; } = new();
         public Location UserLocation { get; set; } = new();
-        public FeedViewModel()
+        public SearchViewModel()
 		{
             RefreshCommand.Subscribe(async _ => await FindAsync());
-            SelectNoteCommand.Subscribe(async business => await OpenBusiness(business));
+            SelectBusinessCommand.Subscribe(async business => await OpenBusiness(business));
             AddToListCommand.Subscribe(async business => await AddToList(business));
         }
 
         private async Task AddToList(object business)
         {
-            //await DisplayAlert("Alert", "You have been alerted", "OK");
+            await App.AlertSvc.ShowConfirmationAsync("Confirm Add","Are you sure you want to add this to X list?");
         }
 
         private async Task FindAsync()
@@ -49,6 +49,8 @@ namespace Diner.ViewModels
 
         private async Task OpenBusiness(object business)
         {
+            if (business == null)
+                return;
             var navigationParameter = new Dictionary<string, object>
             {
                 { "business", business }

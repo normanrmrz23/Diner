@@ -3,42 +3,57 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Diner.Views.BusinessPage"
              xmlns:viewModels="clr-namespace:Diner.ViewModels"
-             Title="BusinessPage"
-             BackgroundColor="{StaticResource Secondary}">
+             Title=""
+             BackgroundColor="{StaticResource Primary}">
     <ContentPage.BindingContext>
         <viewModels:BusinessPageViewModel/>
     </ContentPage.BindingContext>
     <ScrollView>
-    <VerticalStackLayout Spacing="10">
-        <Image
-            Source="{Binding ImageUrl.Value}"
-            VerticalOptions="Center" 
-            HorizontalOptions="FillAndExpand"
-            HeightRequest="400"/>
-        <Label 
-            Text="{Binding Name.Value}"
-            FontSize="50"
-            FontAttributes="Bold"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
-        <Label Text="Phone: " FontSize="Large"/>
-        <Label Text="{Binding Phone.Value}" FontSize="Large"/>
-        </HorizontalStackLayout>
-        <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
-        <Label Text="Rating: " FontSize="Large"/>
-        <Label Text="{Binding Rating.Value}" FontSize="Large"/>
-        </HorizontalStackLayout>
-        <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
-        <Label Text="Distance: " FontSize="Large"/>
-        <Label Text="{Binding DistanceAway.Value}" FontSize="Large"/>
-        </HorizontalStackLayout>
-        <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
-        <Label Text="Open: " FontSize="Large"/>
-        <Label Text="{Binding IsClosed.Value}" FontSize="Large"/>
-        </HorizontalStackLayout>
-        <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
-        <Button Text="Website" Command="{Binding OpenWebsiteCommand}"/>
+    <VerticalStackLayout Spacing="50">
+        <Frame HeightRequest="200"
+                   HorizontalOptions="FillAndExpand"
+                   IsClippedToBounds="True"
+                   CornerRadius="0"
+                   Padding="0"
+                   BorderColor="Transparent"
+                   Margin="0,0,0,0">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Image
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                Source="{Binding ImageUrl.Value}"
+                VerticalOptions="Center" />
+            <HorizontalStackLayout Grid.Row="1" BackgroundColor="#CCC1B6A4" Spacing="20">
+            <Label FontSize="Title" FontAttributes="Bold" Text="{Binding Name.Value}"/>
+            <Label FontSize="Subtitle" TextColor="Green" VerticalOptions="Center" Text="{Binding OpenOrClosed.Value}"/>
+            </HorizontalStackLayout>
+        </Grid>
+        </Frame>
+        <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="50">
+            <ImageButton Command="{Binding OpenPhoneCommand}">
+                <ImageButton.Source>
+                    <FontImageSource FontFamily="FontAwesomeSolid" Color="{StaticResource Secondary}" Size="50" Glyph="{StaticResource phone}"/>  
+                </ImageButton.Source>
+            </ImageButton>
+            <ImageButton>
+                <ImageButton.Source>
+                    <FontImageSource FontFamily="FontAwesomeSolid" Color="{StaticResource Secondary}" Size="50" Glyph="{StaticResource star}"/>  
+                </ImageButton.Source>
+            </ImageButton>       
+            <ImageButton Command="{Binding OpenMapsCommand}">
+                <ImageButton.Source>
+                    <FontImageSource FontFamily="FontAwesomeSolid" Color="{StaticResource Secondary}" Size="50" Glyph="{StaticResource map}"/>  
+                </ImageButton.Source>
+            </ImageButton>
+            <ImageButton Command="{Binding OpenWebsiteCommand}">
+                <ImageButton.Source>
+                    <FontImageSource FontFamily="FontAwesomeSolid" Color="{StaticResource Secondary}" Size="50" Glyph="{StaticResource globe}"/>  
+                </ImageButton.Source>
+            </ImageButton>
         </HorizontalStackLayout>
     </VerticalStackLayout>
     </ScrollView>
