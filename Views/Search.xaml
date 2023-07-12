@@ -88,7 +88,7 @@
             </Grid>
             <CollectionView x:Name="businessCollection"
                     ItemsSource="{Binding Businesses}"
-                        Margin="10"
+                        Margin="0"
                             Grid.Row="1"
                             Grid.Column="0"
                         SelectionMode="Single"
@@ -97,19 +97,19 @@
 
                 <!-- Designate how the collection of items are laid out -->
         <CollectionView.ItemsLayout>
-            <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+            <LinearItemsLayout Orientation="Vertical" ItemSpacing="5" />
         </CollectionView.ItemsLayout>
 
             <!-- Define the appearance of each item in the list -->
             <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Grid HeightRequest="50">
+                <DataTemplate> 
+                    <Grid HeightRequest="70" Padding="10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="85*"></ColumnDefinition>
                             <ColumnDefinition Width="15*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
 
-                        <VerticalStackLayout Grid.Column="0" Padding="0">
+                        <VerticalStackLayout Grid.Column="0" Padding="0" VerticalOptions="Center">
                             <Label Text="{Binding Name}" Grid.Column="0" FontSize="22" FontAttributes="Bold"/>
                             <HorizontalStackLayout Spacing="10">
                                 <HorizontalStackLayout Spacing="5" Grid.Column="1">
@@ -129,8 +129,13 @@
                     </HorizontalStackLayout>
                     -->
              
-                        <ImageButton Source="plus_solid.png" Command="{Binding  BindingContext.AddToListCommand, Source={x:Reference FeedPage}}"
-                                     Grid.Column="3" HeightRequest="40" WidthRequest="40" HorizontalOptions="End" BackgroundColor="{StaticResource Secondary}"/>
+                        <ImageButton Command="{Binding  BindingContext.AddToListCommand, Source={x:Reference FeedPage}}"
+                                     Grid.Column="3" HeightRequest="40" WidthRequest="40" HorizontalOptions="End">
+                            <ImageButton.Source>
+                                <FontImageSource FontFamily="FontAwesomeSolid" Color="{StaticResource Secondary}" Size="50" Glyph="{StaticResource plus}"/>  
+                            </ImageButton.Source>
+
+                        </ImageButton>
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

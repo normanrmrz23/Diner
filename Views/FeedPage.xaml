@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:Diner.ViewModels"
+             x:Class="Diner.Views.FeedPage"
+             Title="Feed"
+             BackgroundColor="{StaticResource Primary}">
+    <ContentPage.BindingContext>
+        <viewModels:FeedPageViewModel/>
+    </ContentPage.BindingContext>
+    <VerticalStackLayout
+            VerticalOptions="Center"
+            Spacing="80">
+            <VerticalStackLayout
+                Padding="0,40,0,0"
+                Spacing="0">
+            <Label
+                Text="FEED"
+                FontFamily="AltaRegular"
+                FontSize="50"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                TextColor="#C1B6A4"/>
+                <Label></Label>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+</ContentPage>

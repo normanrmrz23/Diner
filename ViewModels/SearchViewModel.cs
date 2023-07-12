@@ -37,8 +37,8 @@ namespace Diner.ViewModels
             request.Latitude = UserLocation.Latitude;
             request.Longitude = UserLocation.Longitude;
             request.Term = SearchTerm.Value;
-            request.MaxResults = 15;
-
+            request.MaxResults = 20;
+            request.SortBy = "rating";
             var client = new Yelp.Api.Client("IrsBbxZg4DcGnOIluEU_-Qk9y6U2lt4__1rHcAK2fCM6MSbaWZNBAtJzhd8rTciuJ2Q5WbWbi2U29DKlQOr5GhfiDx8_yS2YN4xaRYh8vhN_MG8OVkhWfkFAhLWVZHYx");
             var results = await client.SearchBusinessesAllAsync(request);
             foreach (Yelp.Api.Models.BusinessResponse business in results.Businesses) {

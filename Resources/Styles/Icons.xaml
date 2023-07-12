@@ -9,4 +9,5 @@
         <x:String x:Key="star">&#xf005;</x:String>
         <x:String x:Key="map">&#xf279;</x:String>
         <x:String x:Key="globe">&#xf0ac;</x:String>
+        <x:String x:Key="plus">&#x2b;</x:String>
 </ResourceDictionary>
