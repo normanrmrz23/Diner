@@ -1,4 +1,6 @@
 ﻿using System;
+using SQLite;
+
 namespace Diner.Models
 {
 	public class Business : Yelp.Api.Models.ResponseBase
@@ -7,7 +9,8 @@ namespace Diner.Models
 		{
 
 		}
-
+        [PrimaryKey, AutoIncrement]
+        public int ID { get; set; }
         public Yelp.Api.Models.Category[] Categories { get; set; }
         public Yelp.Api.Models.Coordinates Coordinates { get; set; }
         public string DisplayPhone { get; set; }

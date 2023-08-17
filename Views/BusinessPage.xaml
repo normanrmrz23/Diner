@@ -9,7 +9,7 @@
         <viewModels:BusinessPageViewModel/>
     </ContentPage.BindingContext>
     <ScrollView>
-    <VerticalStackLayout Spacing="50">
+    <VerticalStackLayout Spacing="30">
         <Frame HeightRequest="200"
                    HorizontalOptions="FillAndExpand"
                    IsClippedToBounds="True"
@@ -27,34 +27,53 @@
                 Grid.RowSpan="2"
                 Source="{Binding ImageUrl.Value}"
                 VerticalOptions="Center" />
-            <HorizontalStackLayout Grid.Row="1" BackgroundColor="#CCC1B6A4" Spacing="20">
-            <Label FontSize="Title" FontAttributes="Bold" Text="{Binding Name.Value}"/>
-            <Label FontSize="Subtitle" TextColor="Green" VerticalOptions="Center" Text="{Binding OpenOrClosed.Value}"/>
-            </HorizontalStackLayout>
+            
         </Grid>
         </Frame>
-        <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="50">
-            <ImageButton Command="{Binding OpenPhoneCommand}">
+        <Grid Margin="10" ColumnSpacing="10" RowSpacing="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="25*"></ColumnDefinition>
+            <ColumnDefinition Width="25*"></ColumnDefinition>
+            <ColumnDefinition Width="25*"></ColumnDefinition>
+            <ColumnDefinition Width="25*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+            <HorizontalStackLayout Spacing="10">
+            <Label Text="{Binding Name.Value}" FontSize="Title"></Label>
+            <Label HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding OpenOrClosed.Value}" BackgroundColor="White" TextColor="Green" ></Label>
+            </HorizontalStackLayout>
+            <ImageButton Grid.Row="1" Grid.Column="0" Command="{Binding OpenPhoneCommand}" Aspect="Center" BackgroundColor="{StaticResource Secondary}" BorderColor="{StaticResource Secondary}" BorderWidth="1" CornerRadius="20">
                 <ImageButton.Source>
-                    <FontImageSource FontFamily="FontAwesomeSolid" Color="{StaticResource Secondary}" Size="50" Glyph="{StaticResource phone}"/>  
+                    <FontImageSource FontFamily="FontAwesomeSolid" Color="{StaticResource Primary}" Size="30" Glyph="{StaticResource phone}"/>  
                 </ImageButton.Source>
             </ImageButton>
-            <ImageButton>
+            <Label Text="Call" Grid.Row="2" Grid.Column="0" HorizontalOptions="Center"></Label>
+
+            <ImageButton Grid.Row="1" Grid.Column="1" Aspect="Center" BackgroundColor="{StaticResource Secondary}" BorderColor="{StaticResource Secondary}" BorderWidth="1" CornerRadius="20">
                 <ImageButton.Source>
-                    <FontImageSource FontFamily="FontAwesomeSolid" Color="{StaticResource Secondary}" Size="50" Glyph="{StaticResource star}"/>  
-                </ImageButton.Source>
-            </ImageButton>       
-            <ImageButton Command="{Binding OpenMapsCommand}">
-                <ImageButton.Source>
-                    <FontImageSource FontFamily="FontAwesomeSolid" Color="{StaticResource Secondary}" Size="50" Glyph="{StaticResource map}"/>  
+                    <FontImageSource FontFamily="FontAwesomeSolid" Color="{StaticResource Primary}" Size="30" Glyph="{StaticResource star}"/>  
                 </ImageButton.Source>
             </ImageButton>
-            <ImageButton Command="{Binding OpenWebsiteCommand}">
+            <Label Text="Reviews" Grid.Row="2" Grid.Column="1" HorizontalOptions="Center"></Label>
+
+            <ImageButton Grid.Row="1" Grid.Column="2" Command="{Binding OpenMapsCommand}" Aspect="Center" BackgroundColor="{StaticResource Secondary}" BorderColor="{StaticResource Secondary}" BorderWidth="1" CornerRadius="20">
                 <ImageButton.Source>
-                    <FontImageSource FontFamily="FontAwesomeSolid" Color="{StaticResource Secondary}" Size="50" Glyph="{StaticResource globe}"/>  
+                    <FontImageSource FontFamily="FontAwesomeSolid" Color="{StaticResource Primary}" Size="30" Glyph="{StaticResource map}"/>  
                 </ImageButton.Source>
             </ImageButton>
-        </HorizontalStackLayout>
+            <Label Text="Map" Grid.Row="2" Grid.Column="2" HorizontalOptions="Center"></Label>
+
+            <ImageButton Grid.Row="1" Grid.Column="3" Command="{Binding OpenWebsiteCommand}" Aspect="Center" BackgroundColor="{StaticResource Secondary}" BorderColor="{StaticResource Secondary}" BorderWidth="1" CornerRadius="20">
+                <ImageButton.Source>
+                    <FontImageSource FontFamily="FontAwesomeSolid" Color="{StaticResource Primary}" Size="30" Glyph="{StaticResource globe}"/>  
+                </ImageButton.Source>
+            </ImageButton>
+            <Label Text="Website" Grid.Row="2" Grid.Column="3" HorizontalOptions="Center"></Label>
+        </Grid>
     </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

@@ -30,5 +30,11 @@
 	<string>Assets.xcassets/appicon.appiconset</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Access Location to Poll Yelp API</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Access to Bluetooth (General)</string>
+	<key>GoogleClientID</key>
+	<string>222511225250-mej0r5h4v5ptt3opt3g8lchr6tmj53n4.apps.googleusercontent.com</string>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+	<true/>
 </dict>
 </plist>

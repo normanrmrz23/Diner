@@ -5,28 +5,28 @@ using System.Windows.Input;
 
 namespace Diner.ViewModels;
 
-internal class AllListsViewModel : IQueryAttributable
+internal class AllListsPageViewModel : IQueryAttributable
 {
-    public ObservableCollection<ViewModels.ListsViewModel> AllNotes { get; }
+    public ObservableCollection<ViewModels.ListsPageViewModel> AllNotes { get; }
     public ICommand NewCommand { get; }
     public ICommand SelectNoteCommand { get; }
 
-    public AllListsViewModel()
+    public AllListsPageViewModel()
     {
-        AllNotes = new ObservableCollection<ViewModels.ListsViewModel>(Models.Lists.LoadAll().Select(n => new ListsViewModel(n)));
+        AllNotes = new ObservableCollection<ViewModels.ListsPageViewModel>(Models.Lists.LoadAll().Select(n => new ListsPageViewModel(n)));
         NewCommand = new AsyncRelayCommand(NewNoteAsync);
-        SelectNoteCommand = new AsyncRelayCommand<ViewModels.ListsViewModel>(SelectListAsync);
+        SelectNoteCommand = new AsyncRelayCommand<ViewModels.ListsPageViewModel>(SelectListAsync);
     }
 
     private async Task NewNoteAsync()
     {
-        await Shell.Current.GoToAsync(nameof(Views.Lists));
+        await Shell.Current.GoToAsync(nameof(Views.ListsPage));
     }
 
-    private async Task SelectListAsync(ViewModels.ListsViewModel note)
+    private async Task SelectListAsync(ViewModels.ListsPageViewModel note)
     {
         if (note != null)
-            await Shell.Current.GoToAsync($"{nameof(Views.Lists)}?load={note.Identifier}");
+            await Shell.Current.GoToAsync($"{nameof(Views.ListsPage)}?load={note.Identifier}");
     }
 
     void IQueryAttributable.ApplyQueryAttributes(IDictionary<string, object> query)
@@ -34,7 +34,7 @@ internal class AllListsViewModel : IQueryAttributable
         if (query.ContainsKey("deleted"))
         {
             string noteId = query["deleted"].ToString();
-            ListsViewModel matchedNote = AllNotes.Where((n) => n.Identifier == noteId).FirstOrDefault();
+            ListsPageViewModel matchedNote = AllNotes.Where((n) => n.Identifier == noteId).FirstOrDefault();
 
             // If note exists, delete it
             if (matchedNote != null)
@@ -43,7 +43,7 @@ internal class AllListsViewModel : IQueryAttributable
         else if (query.ContainsKey("saved"))
         {
             string noteId = query["saved"].ToString();
-            ListsViewModel matchedNote = AllNotes.Where((n) => n.Identifier == noteId).FirstOrDefault();
+            ListsPageViewModel matchedNote = AllNotes.Where((n) => n.Identifier == noteId).FirstOrDefault();
 
             // If note is found, update it
             if (matchedNote != null)
@@ -54,7 +54,7 @@ internal class AllListsViewModel : IQueryAttributable
 
             // If note isn't found, it's new; add it.
             else
-                AllNotes.Insert(0, new ListsViewModel(Models.Lists.Load(noteId)));
+                AllNotes.Insert(0, new ListsPageViewModel(Models.Lists.Load(noteId)));
         }
     }
 }

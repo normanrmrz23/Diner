@@ -1,8 +1,8 @@
 ﻿namespace Diner.Views;
 
-public partial class AllLists : ContentPage
+public partial class AllListsPage : ContentPage
 {
-    public AllLists()
+    public AllListsPage()
     {
         InitializeComponent();
     }

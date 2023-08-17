@@ -1,10 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Windows.Input;
+using Diner.Framework;
 
 namespace Diner.ViewModels;
 
-internal class ListsViewModel : ObservableObject, IQueryAttributable
+internal class ListsPageViewModel : ObservableObject, IQueryAttributable
 {
     private Models.Lists _list;
 
@@ -28,14 +29,14 @@ internal class ListsViewModel : ObservableObject, IQueryAttributable
     public ICommand SaveCommand { get; private set; }
     public ICommand DeleteCommand { get; private set; }
 
-    public ListsViewModel()
+    public ListsPageViewModel()
     {
         _list = new Models.Lists();
         SaveCommand = new AsyncRelayCommand(Save);
         DeleteCommand = new AsyncRelayCommand(Delete);
     }
 
-    public ListsViewModel(Models.Lists note)
+    public ListsPageViewModel(Models.Lists note)
     {
         _list = note;
         SaveCommand = new AsyncRelayCommand(Save);

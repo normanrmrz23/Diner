@@ -14,10 +14,10 @@
             ContentTemplate="{DataTemplate views:FeedPage}"
             Icon="utensils_solid.png" />
         <ShellContent
-            ContentTemplate="{DataTemplate views:Search}"
+            ContentTemplate="{DataTemplate views:SearchPage}"
             Icon="magnifying_glass_solid"/>
         <ShellContent
-            ContentTemplate="{DataTemplate views:AllLists}"
+            ContentTemplate="{DataTemplate views:AllListsPage}"
             Icon="list_solid.png" />
         <ShellContent
             ContentTemplate="{DataTemplate views:ProfilePage}"
