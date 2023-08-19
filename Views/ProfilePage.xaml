@@ -2,34 +2,34 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Diner.Views.ProfilePage"
-             Title="Profile"
+             Shell.NavBarIsVisible="False"
              BackgroundColor="{StaticResource Primary}">
-    <Grid>
+    <Grid Margin="10" RowSpacing="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="20*"></RowDefinition>
-            <RowDefinition Height="80*"></RowDefinition>
+            <RowDefinition Height="30*"></RowDefinition>
+            <RowDefinition Height="70*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" ColumnSpacing="10">
+        <Grid Grid.Row="0" Padding="0,0,0,10" RowSpacing="10">
             <Grid.RowDefinitions>
-
+                <RowDefinition Height="20*"></RowDefinition>
+                <RowDefinition Height="80*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="30*"></ColumnDefinition>
-                <ColumnDefinition Width="70*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Frame Grid.Column="0"
+            <Label Grid.Row="0" FontFamily="OtomanopeeRegular" Text="ADDISONBH" FontSize="Large" FontAttributes="Bold"
+                   HeightRequest="30" WidthRequest="140" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HorizontalOptions="Center" VerticalOptions="Center"
+                   TextColor="{StaticResource Primary}" BackgroundColor="{StaticResource Tertiary}"></Label>
+            <Frame Grid.Row="1"
                    HeightRequest="120"
                    WidthRequest="120"
                    CornerRadius="70"
                    HorizontalOptions="Center"
                    IsClippedToBounds="True"
                    Padding="0"
-                   BorderColor="Gray"
+                   BorderColor="Transparent"
                    Margin="0,0,0,0">
 
                 <Image
-                    Grid.Column="0"
+                    Grid.Row="1"
                     Aspect="AspectFit"
                     Source="addi.png"
                     HeightRequest="200"
@@ -37,25 +37,32 @@
                     VerticalOptions="Center"
                     HorizontalOptions="Center" />
             </Frame>
-            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
-                <Label FontSize="28" FontAttributes="Bold" Text="Addison Hollensed" VerticalOptions="Center" />
-                <Label FontSize="18" Text="Los Angeles, California" VerticalOptions="End" />
-            </VerticalStackLayout>
             </Grid>
-        <Grid Grid.Row="1" RowSpacing="10" ColumnSpacing="10" Padding="10">
+        <Grid Grid.Row="1" RowSpacing="10" ColumnSpacing="10" Padding="0,10,0,0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="20*"></RowDefinition>
-                <RowDefinition Height="20*"></RowDefinition>
-                <RowDefinition Height="60*"></RowDefinition>
+                <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="10*"></RowDefinition>
+
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50*"></ColumnDefinition>
-                <ColumnDefinition Width="50*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Text="Offers"  Grid.Row="0" Grid.Column="0" Command="{Binding ShowMoreInfoCommand}"/>
-            <Button Text="Your Lists" Grid.Row="0" Grid.Column="1" Command="{Binding ShowMoreInfoCommand}"/>
-            <Button Text="Reservations" Grid.Row="1" Grid.Column="0" Command="{Binding ShowMoreInfoCommand}"/>
-            <Button Text="Logs" Grid.Row="1" Grid.Column="1" Command="{Binding ShowMoreInfoCommand}"/>
+            <Button Text="Favorites" FontFamily="OtomanopeeRegular"  Grid.Row="0" Command="{Binding ShowMoreInfoCommand}"/>
+            <Button Text="Recents" FontFamily="OtomanopeeRegular" Grid.Row="1" Command="{Binding ShowMoreInfoCommand}"/>
+            <Button Text="Lists" FontFamily="OtomanopeeRegular" Grid.Row="2" Command="{Binding ShowMoreInfoCommand}"/>
+            <Button Text="Offers" FontFamily="OtomanopeeRegular" Grid.Row="3" Command="{Binding ShowMoreInfoCommand}"/>
+            <Button Text="Reservations" FontFamily="OtomanopeeRegular" Grid.Row="4" Command="{Binding ShowMoreInfoCommand}"/>
+            <Button Text="Food Group" FontFamily="OtomanopeeRegular" Grid.Row="5" Command="{Binding ShowMoreInfoCommand}"/>
+            <Button Text="Followers" FontFamily="OtomanopeeRegular" Grid.Row="6" Command="{Binding ShowMoreInfoCommand}"/>
+            <Button Text="Following" FontFamily="OtomanopeeRegular" Grid.Row="7" Command="{Binding ShowMoreInfoCommand}"/>
+            <Button Text="Regulars" FontFamily="OtomanopeeRegular" Grid.Row="8" Command="{Binding ShowMoreInfoCommand}"/>
 
         </Grid>
     </Grid>

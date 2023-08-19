@@ -6,6 +6,7 @@ namespace Diner.Services
 {
     public interface IFileDb
     {
+        Task<IEnumerable<string>> EnumerateDirectory(string readDirectory);
         Task<IList<string>> ReadFileAsync(string filename, string readDirectory);
         Task WriteFileAsync(string filename, List<string> allLines, string writeDirectory);
         OkFailResult WriteFile(string filename, List<string> allLines, string writeDirectory);
@@ -26,13 +27,18 @@ namespace Diner.Services
             _systemIoFile = systemIoFile;
         }
 
+        public async Task<IEnumerable<string>> EnumerateDirectory(string ReadDirectory)
+        {
+            return Directory.GetFiles(ReadDirectory).Select(f => Path.GetFileName(f));
+        }
+        
         public async Task<IList<string>> ReadFileAsync(string filename, string readDirectory)
         {
             IList<string> allLines = new List<string>();
 
             if (!_systemIoDirectory.Exists(readDirectory))
                 return allLines;
-
+            
             var filePath = Path.Combine(readDirectory, filename);
             if (!_systemIoFile.Exists(filePath))
                 return allLines;

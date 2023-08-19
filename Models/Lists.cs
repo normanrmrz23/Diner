@@ -1,7 +1,7 @@
 ﻿
 namespace Diner.Models;
 
-internal class Lists
+public class Lists
 {
 
     public Lists()

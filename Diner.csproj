@@ -39,7 +39,7 @@
 	  <MtouchInterpreter>all</MtouchInterpreter>
 	  <MtouchLink>None</MtouchLink>
 	  <CodesignProvision>Diner All Devices</CodesignProvision>
-	  <CodesignKey>Apple Development: normanrmrz@me.com (H8VF9L3V8C)</CodesignKey>
+	  <CodesignKey>Apple Development: Norman Ramirez (H8VF9L3V8C)</CodesignKey>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-ios|AnyCPU'">
 	  <CreatePackage>false</CreatePackage>
@@ -109,10 +109,10 @@
 	  <None Remove="Resources\Fonts\calibri.ttf" />
 	  <None Remove="Resources\Images\magnifying_glass_solid.svg" />
 	  <None Remove="Resources\Images\utensils_solid.svg" />
-	  <None Remove="Resources\AppIcon\.DS_Store" />
 	  <None Remove="Resources\Styles\EmptyXmlFile.xml" />
 	  <None Remove="Resources\Fonts\Font Awesome 6 Brands-Regular-400.otf" />
 	  <None Remove="Resources\Fonts\Font Awesome 6 Free-Solid-900.otf" />
+	  <None Remove="Resources\Fonts\OtomanopeeOne-Regular.ttf" />
 	</ItemGroup>
 	<ItemGroup>
 	  <BundleResource Include="Resources\Images\icon_about.png" />
@@ -141,10 +141,10 @@
 	  <BundleResource Include="Resources\Fonts\calibri.ttf" />
 	  <BundleResource Include="Resources\Images\magnifying_glass_solid.svg" />
 	  <BundleResource Include="Resources\Images\utensils_solid.svg" />
-	  <BundleResource Include="Resources\AppIcon\.DS_Store" />
 	  <BundleResource Include="Resources\Styles\Icons.xaml" />
 	  <BundleResource Include="Resources\Fonts\fa-regular-400.otf" />
 	  <BundleResource Include="Resources\Fonts\fa-solid-900.otf" />
+	  <BundleResource Include="Resources\Fonts\OtomanopeeOne-Regular.ttf" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Views\" />

@@ -1,21 +1,37 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using Diner.Framework;
 using Diner.Models;
+using Diner.Services;
+using Reactive.Bindings;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace Diner.ViewModels;
 
-internal class AllListsPageViewModel : IQueryAttributable
+public class AllListsPageViewModel : ViewModelBase, IQueryAttributable
 {
-    public ObservableCollection<ViewModels.ListsPageViewModel> AllNotes { get; }
+    private readonly IListLoader _listLoader;
+    public List<string> _myList;
+    public IEnumerable<string> _allLists;
+
+    public ObservableCollection<ListsPageViewModel> AllNotes { get; }
     public ICommand NewCommand { get; }
     public ICommand SelectNoteCommand { get; }
-
-    public AllListsPageViewModel()
+    public ReactiveCommand LoadListCommand { get; } = new();
+    public AllListsPageViewModel(IListLoader listLoader)
     {
+        _listLoader = listLoader;
+
         AllNotes = new ObservableCollection<ViewModels.ListsPageViewModel>(Models.Lists.LoadAll().Select(n => new ListsPageViewModel(n)));
         NewCommand = new AsyncRelayCommand(NewNoteAsync);
         SelectNoteCommand = new AsyncRelayCommand<ViewModels.ListsPageViewModel>(SelectListAsync);
+        LoadListCommand.Subscribe(async _ => await LoadListsAsync());
+    }
+
+    private async Task LoadListsAsync()
+    {
+        _myList = await _listLoader.LoadAsync("MyList");
+        _allLists = await _listLoader.LoadAllListsAsync();
     }
 
     private async Task NewNoteAsync()

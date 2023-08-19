@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Diner.Views.HomePage"
              xmlns:viewModels="clr-namespace:Diner.ViewModels"
-             Title="Home"
-             BackgroundColor="#526534">
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="{StaticResource Primary}">
         <VerticalStackLayout
             VerticalOptions="Center"
             Spacing="80">

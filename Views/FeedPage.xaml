@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:Diner.ViewModels"
              x:Class="Diner.Views.FeedPage"
-             Title="Feed"
+             Shell.NavBarIsVisible="False"
              BackgroundColor="{StaticResource Primary}">
     <ContentPage.BindingContext>
         <viewModels:FeedPageViewModel/>

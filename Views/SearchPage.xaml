@@ -1,10 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewModels="clr-namespace:Diner.ViewModels"
              x:Class="Diner.Views.SearchPage"
              x:Name="SearchP"
-             Title="Search"
+             Shell.NavBarIsVisible="False"
              NavigatedTo="ContentPage_NavigatedTo"
              Background="{StaticResource Primary}">
     <ContentPage.Resources>
@@ -65,16 +64,16 @@
             <ColumnDefinition Width="95*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="15*"/>
-            <RowDefinition Height="85*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="90*"/>
         </Grid.RowDefinitions>
             <Grid Grid.Row="0" Grid.Column="0" ColumnSpacing="10" Padding="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="70*"/>
                 <ColumnDefinition Width="20*"/>
             </Grid.ColumnDefinitions>
-            <Entry Text="{Binding SearchTerm.Value}" Placeholder="Search..." ReturnCommand="{Binding RefreshCommand}" Grid.Column="0" BackgroundColor="White" TextColor="Black"/>
-            <Button Text="Search" Grid.Column="1" Command="{Binding RefreshCommand}"/>
+            <Entry Text="{Binding SearchTerm.Value}" Placeholder="Search..." ReturnCommand="{Binding RefreshCommand}" Grid.Column="0" BackgroundColor="{StaticResource Secondary}" TextColor="Black"/>
+            <Button Text="Search" TextColor="{StaticResource Primary}" BackgroundColor="{StaticResource Tertiary}" Grid.Column="1" Command="{Binding RefreshCommand}"/>
             </Grid>
             <CollectionView x:Name="businessCollection"
                     ItemsSource="{Binding Businesses}"
@@ -109,6 +108,10 @@
                                 <HorizontalStackLayout Spacing="5" Grid.Column="2">
                                     <Label Text="Reviews:" FontSize="14" VerticalOptions="Center"/>
                                     <Label Text="{Binding ReviewCount}" FontSize="14" VerticalOptions="Center"/>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout Spacing="5" Grid.Column="2">
+                                    <Label Text="Distance:" FontSize="14" VerticalOptions="Center"/>
+                                    <Label Text="{Binding DistanceAway}" FontSize="14" VerticalOptions="Center"/>
                                 </HorizontalStackLayout>
                             </HorizontalStackLayout>
                         </VerticalStackLayout>

@@ -61,7 +61,7 @@ namespace Diner.Framework
            // await Log.Logger.LogElapsedTimeAsync(OnNavigatedAwayAsync, nameof(OnNavigatedAwayAsync));
         }
 
-        public virtual Task OnInitializeAsync(NavigationParameters parameters)
+        public virtual Task OnInitializeAsync()
         {
             return Task.CompletedTask;
         }

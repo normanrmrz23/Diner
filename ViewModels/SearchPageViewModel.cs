@@ -3,43 +3,53 @@ using Yelp.Api.Models;
 using Diner.Models;
 using Diner.Framework;
 using Diner.Services;
+using Diner.Views;
 
 namespace Diner.ViewModels
 {
     public class SearchPageViewModel : ViewModelBase
     {
         private readonly IListWriter _listWriter;
+        private readonly IListLoader _listLoader;
+        private readonly IPopupService _popupService;
+        private AddToListPopupPage _popup;
 
         Data database;
         public ReactiveCollection<BusinessResponse> Businesses { get; } = new();
         public AsyncReactiveCommand RefreshCommand { get; } = new();
         public ReactiveProperty<bool> IsRefreshing { get; set; } = new();
         public AsyncReactiveCommand SelectBusinessCommand { get; } = new();
-        public ReactiveProperty<string> SearchTerm { get; set; } = new();
+        public ReactiveProperty<string> SearchTerm { get; set; } = new("Bakery");
         public AsyncReactiveCommand AddToListCommand { get; set; } = new();
         public Microsoft.Maui.Devices.Sensors.Location UserLocation { get; set; } = new();
         public BusinessList MyList { get; set; } = new();
         public List<BusinessList> MyLists { get; set; } = new();
 
-        public SearchPageViewModel(IListWriter listWriter)
+        public SearchPageViewModel(IListWriter listWriter,
+            IListLoader listLoader,
+            IPopupService popupService)
 		{
             _listWriter = listWriter;
+            _listLoader = listLoader;
+            _popupService = popupService;
 
-            RefreshCommand.Subscribe(async _ => FindAsync());
-            SelectBusinessCommand.Subscribe(async business => await OpenBusiness(business));
-            AddToListCommand.Subscribe(async business => await AddToList(business));
+            RefreshCommand.Subscribe(async _ => await FindAsync());
+            SelectBusinessCommand.Subscribe(OpenBusiness);
+            AddToListCommand.Subscribe(async business => await ShowAddToListPopup(business));
+            FindAsync();
         }
 
-        private async Task AddToList(object business)
+        private async Task ShowAddToListPopup(object business)
         {
-            var b = business as BusinessResponse;
-            var message = b.Name + " has successfully been added to MyList";
-            await App.AlertSvc.ShowAlertAsync("", message);
-            //MyList.Businesses.Add(b);
-            await _listWriter.WriteAsync("MyList", b);
+            void action()
+            {
+                _popup.Close();
+            }
+            _popup = new AddToListPopupPage(new AddToListPopupPageViewModel(business as BusinessResponse, _listWriter, _listLoader, action));
+            _popupService.ShowPopup(_popup);
         }
 
-        private async void FindAsync()
+        private async Task FindAsync()
         {
             IsRefreshing.Value = true;
             Businesses.Clear();
@@ -49,7 +59,7 @@ namespace Diner.ViewModels
             request.Longitude = UserLocation.Longitude;
             request.Term = SearchTerm.Value;
             request.MaxResults = 20;
-            request.SortBy = "rating";
+            request.SortBy = "distance";
             //filter out non restaurants
             var client = new Yelp.Api.Client("IrsBbxZg4DcGnOIluEU_-Qk9y6U2lt4__1rHcAK2fCM6MSbaWZNBAtJzhd8rTciuJ2Q5WbWbi2U29DKlQOr5GhfiDx8_yS2YN4xaRYh8vhN_MG8OVkhWfkFAhLWVZHYx");
             var results = await client.SearchBusinessesAllAsync(request);

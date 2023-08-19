@@ -51,7 +51,7 @@ namespace Diner.Services
                     var fullPath = Path.Combine(path, filename);
                     File.WriteAllLines(fullPath, infoFileLines);
 
-                    //_fileDb.WriteFile(filename, infoFileLines, _listsDirectoryPath);
+                    _fileDb.WriteFile(filename, infoFileLines, _listsDirectoryPath);
                 }
                 catch (Exception e)
                 {
