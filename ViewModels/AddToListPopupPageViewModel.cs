@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using Diner.Framework;
 using Diner.Services;
+using Diner.Views;
 using Reactive.Bindings;
 using Yelp.Api.Models;
 
@@ -11,24 +12,32 @@ namespace Diner.ViewModels
 	{
         private readonly IListWriter _listWriter;
         private readonly IListLoader _listLoader;
-        private Action _closeCommand;
+        private readonly IPopupService _popupService;
+
+        private Action<bool> _closeCommand;
+        private CreateNewListPopupPage _popup;
+
         public BusinessResponse Business { get; set; } = new();
         public ObservableCollection<string> Lists { get; } = new();
         public AsyncReactiveCommand SelectListCommand { get; } = new();
+        public AsyncReactiveCommand NewListCommand { get; } = new();
 
         public AddToListPopupPageViewModel(BusinessResponse business,
         IListWriter listWriter,
         IListLoader listLoader,
-        Action closeCommand)
+        IPopupService popupService,
+        Action<bool> closeCommand)
 		{
             _listWriter = listWriter;
             _listLoader = listLoader;
+            _popupService = popupService;
             _closeCommand = closeCommand;
 
             Business = business;
 
             Lists = new ObservableCollection<string>(_listLoader.LoadAllListsAsync().Result);
             SelectListCommand.Subscribe(AddToSpecifiedList);
+            NewListCommand.Subscribe(SaveToNewList);
         }
 
         private async Task AddToSpecifiedList(object listName)
@@ -36,12 +45,12 @@ namespace Diner.ViewModels
             var b = Business;
             //MyList.Businesses.Add(b);
             await _listWriter.WriteAsync(listName as string, b);
-            CloseCommand();
+            CloseCommand(true);
         }
 
-        private void CloseCommand()
+        private void CloseCommand(bool result)
         {
-            _closeCommand();
+            _closeCommand(result);
         }
 
         private Task SaveToSpecifiedList(object business)
@@ -49,14 +58,13 @@ namespace Diner.ViewModels
             throw new NotImplementedException();
         }
 
-        private Task SaveToNewList(object business)
+        private async Task SaveToNewList(object business)
         {
-            throw new NotImplementedException();
-        }
-
-        async void Button_Clicked(System.Object sender, System.EventArgs e)
-        {
-            //await _listWriter.WriteAsync("MyList", Business);
+            void action()
+            {
+                _popup.Close();
+            }
+            CloseCommand(true);
         }
 
     }

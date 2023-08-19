@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup
+	x:Class="Diner.Views.CreateNewListPopupPage"
+	xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+	Color="{StaticResource Primary}" >
+
+	<Grid BackgroundColor="{StaticResource Primary}" Margin="10" RowSpacing="10">
+		<Grid.ColumnDefinitions>
+            <ColumnDefinition Width="95*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="10*"></RowDefinition>
+			<RowDefinition Height="10*"></RowDefinition>
+			<RowDefinition Height="10*"></RowDefinition>
+			<RowDefinition Height="60*"></RowDefinition>
+			<RowDefinition Height="10*"></RowDefinition>
+		</Grid.RowDefinitions>
+
+		<Label Grid.Row="0" HorizontalOptions="Center" FontSize="Title" TextColor="{StaticResource Tertiary}" Text="New List" />
+		<Entry Grid.Row="1" Placeholder="Enter a name for your new list" PlaceholderColor="White" Text="{Binding ListName.Value}" BackgroundColor="{StaticResource Secondary}"></Entry>
+		<HorizontalStackLayout Grid.Row="2" Spacing="5">
+			<Label Grid.Row="2" Text="Adding:"/>
+			<Label Grid.Row="2" Text="{Binding Business.Name}"/>
+		</HorizontalStackLayout>
+		<Button
+			BackgroundColor="{StaticResource Tertiary}"
+			Grid.Row="4"
+			Text="Create New List"
+			TextColor="{StaticResource Primary}"
+			Command="{Binding CreateNewListCommand}"/>
+	</Grid>
+</mct:Popup>

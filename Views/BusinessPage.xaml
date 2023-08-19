@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Diner.Views.BusinessPage"
              xmlns:viewModels="clr-namespace:Diner.ViewModels"
-             Title=""
+             Shell.NavBarIsVisible="False"
              BackgroundColor="{StaticResource Primary}">
     <ContentPage.BindingContext>
         <viewModels:BusinessPageViewModel/>

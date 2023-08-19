@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Maui.Views;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Views;
 using Diner.Models;
 using Diner.Services;
 using Diner.ViewModels;
@@ -11,7 +12,6 @@ namespace Diner.Views;
 
 public partial class AddToListPopupPage : Popup
 {
-    
     public AddToListPopupPage(AddToListPopupPageViewModel viewModel
         /*PopupSizeConstants popupSizeConstants*/)
 	{
@@ -19,5 +19,4 @@ public partial class AddToListPopupPage : Popup
         BindingContext = viewModel;
         Size = new(300, 500);
     }
-
 }

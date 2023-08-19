@@ -13,6 +13,7 @@ namespace Diner.ViewModels
         private readonly IListLoader _listLoader;
         private readonly IPopupService _popupService;
         private AddToListPopupPage _popup;
+        private CreateNewListPopupPage _newPopup;
 
         Data database;
         public ReactiveCollection<BusinessResponse> Businesses { get; } = new();
@@ -41,12 +42,18 @@ namespace Diner.ViewModels
 
         private async Task ShowAddToListPopup(object business)
         {
-            void action()
+            async void action(bool result)
             {
-                _popup.Close();
+                _popup.Close(result);
+                await Task.Delay(400);
+                if (result)
+                {
+                    _newPopup = new CreateNewListPopupPage(new CreateNewListPopupPageViewModel(business as BusinessResponse, _listWriter, _listLoader, _popupService));
+                    await _popupService.ShowPopupAsync(_newPopup);
+                }
             }
-            _popup = new AddToListPopupPage(new AddToListPopupPageViewModel(business as BusinessResponse, _listWriter, _listLoader, action));
-            _popupService.ShowPopup(_popup);
+            _popup = new AddToListPopupPage(new AddToListPopupPageViewModel(business as BusinessResponse, _listWriter, _listLoader, _popupService, action));
+            var result = await _popupService.ShowPopupAsync(_popup);
         }
 
         private async Task FindAsync()
@@ -58,7 +65,7 @@ namespace Diner.ViewModels
             request.Latitude = UserLocation.Latitude;
             request.Longitude = UserLocation.Longitude;
             request.Term = SearchTerm.Value;
-            request.MaxResults = 20;
+            request.MaxResults = 40;
             request.SortBy = "distance";
             //filter out non restaurants
             var client = new Yelp.Api.Client("IrsBbxZg4DcGnOIluEU_-Qk9y6U2lt4__1rHcAK2fCM6MSbaWZNBAtJzhd8rTciuJ2Q5WbWbi2U29DKlQOr5GhfiDx8_yS2YN4xaRYh8vhN_MG8OVkhWfkFAhLWVZHYx");
