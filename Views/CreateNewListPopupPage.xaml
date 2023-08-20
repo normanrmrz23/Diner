@@ -11,18 +11,20 @@
             <ColumnDefinition Width="95*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="10*"></RowDefinition>
-			<RowDefinition Height="10*"></RowDefinition>
-			<RowDefinition Height="10*"></RowDefinition>
-			<RowDefinition Height="60*"></RowDefinition>
-			<RowDefinition Height="10*"></RowDefinition>
+			<RowDefinition Height="25*"></RowDefinition>
+			<RowDefinition Height="5*"></RowDefinition>
+			<RowDefinition Height="30*"></RowDefinition>
+			<RowDefinition Height="20*"></RowDefinition>
+			<RowDefinition Height="30*"></RowDefinition>
 		</Grid.RowDefinitions>
 
-		<Label Grid.Row="0" HorizontalOptions="Center" FontSize="Title" TextColor="{StaticResource Tertiary}" Text="New List" />
-		<Entry Grid.Row="1" Placeholder="Enter a name for your new list" PlaceholderColor="White" Text="{Binding ListName.Value}" BackgroundColor="{StaticResource Secondary}"></Entry>
-		<HorizontalStackLayout Grid.Row="2" Spacing="5">
-			<Label Grid.Row="2" Text="Adding:"/>
-			<Label Grid.Row="2" Text="{Binding Business.Name}"/>
+		<Label Grid.Row="0" HorizontalOptions="Center" FontSize="Title" FontFamily="OtomanopeeRegular"
+		 TextColor="{StaticResource Tertiary}" Text="New List" />
+		<BoxView HeightRequest="1" Grid.Row="1" Color="{StaticResource Secondary}"/>
+		<Entry Grid.Row="2" Placeholder="Enter a name for your new list" PlaceholderColor="White" Text="{Binding ListName.Value}" BackgroundColor="{StaticResource Secondary}"></Entry>
+		<HorizontalStackLayout Grid.Row="3" Spacing="5">
+			<Label Grid.Row="3" Text="  Adding:"/>
+			<Label Grid.Row="3" Text="{Binding Business.Name}"/>
 		</HorizontalStackLayout>
 		<Button
 			BackgroundColor="{StaticResource Tertiary}"

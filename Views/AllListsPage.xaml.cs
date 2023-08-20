@@ -14,4 +14,13 @@ public partial class AllListsPage : ContentPage
     {
         listCollection.SelectedItem = null;
     }
+
+    private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (listCollection.SelectedItem != null)
+        {
+            listCollection.SelectedItem = null;
+        }
+
+    }
 }

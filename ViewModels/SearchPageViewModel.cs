@@ -18,7 +18,7 @@ namespace Diner.ViewModels
         private readonly IPopupService _popupService;
         private AddToListPopupPage _popup;
         private CreateNewListPopupPage _newPopup;
-        private readonly Client _client = new Client("IrsBbxZg4DcGnOIluEU_-Qk9y6U2lt4__1rHcAK2fCM6MSbaWZNBAtJzhd8rTciuJ2Q5WbWbi2U29DKlQOr5GhfiDx8_yS2YN4xaRYh8vhN_MG8OVkhWfkFAhLWVZHYx");
+        private readonly Client _client = new Client("3dtRAq-a2xkH053tcWiPHiKwDL31nT7ahkln0GGYED79t7V4b8GolZh3xNv9ctHmljcg8jlF9KadP0J_UZpmoesmxNJD_5KX6LPHOQjCtMdTSfYgfaDImF2xXTjiZHYx");
 
         Data database;
         public ReactiveCollection<BusinessResponse> Businesses { get; } = new();
@@ -77,7 +77,6 @@ namespace Diner.ViewModels
             request.Categories = "restaurants";
 
             var results = await _client.SearchBusinessesAllAsync(request);
-
             UpdateBusinessList(results);
             IsRefreshing.Value = false;
         }

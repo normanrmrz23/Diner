@@ -8,8 +8,13 @@
     <ContentPage.BindingContext>
         <viewModels:BusinessPageViewModel/>
     </ContentPage.BindingContext>
-    <ScrollView>
-    <VerticalStackLayout Spacing="30">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="50*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
         <Frame HeightRequest="200"
                    HorizontalOptions="FillAndExpand"
                    IsClippedToBounds="True"
@@ -17,7 +22,7 @@
                    Padding="0"
                    BorderColor="Transparent"
                    Margin="0,0,0,0">
-        <Grid>
+        <Grid Grid.Row="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
@@ -32,7 +37,7 @@
             
         </Grid>
         </Frame>
-        <Grid Margin="10" ColumnSpacing="10" RowSpacing="5">
+        <Grid Grid.Row="1" Margin="10" ColumnSpacing="10" RowSpacing="5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="25*"></ColumnDefinition>
             <ColumnDefinition Width="25*"></ColumnDefinition>
@@ -43,6 +48,7 @@
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
             <HorizontalStackLayout Spacing="10">
             <Label Text="{Binding Name.Value}" FontSize="Title"></Label>
@@ -76,6 +82,65 @@
             </ImageButton>
             <Label Text="Website" Grid.Row="2" Grid.Column="3" HorizontalOptions="Center"></Label>
         </Grid>
-    </VerticalStackLayout>
-    </ScrollView>
+            <Grid Grid.Row="2" ColumnSpacing="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40*"></ColumnDefinition>
+                    <ColumnDefinition Width="40*"></ColumnDefinition>
+                    <ColumnDefinition Width="40*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" StrokeThickness="4"
+                        StrokeShape="RoundRectangle 5,0,0,5"
+                        Background="{StaticResource Secondary}"
+        HorizontalOptions="Center">
+    <Border.Stroke>
+        <LinearGradientBrush EndPoint="0,1">
+            <GradientStop Color="{StaticResource Primary}"
+                          Offset="0.1" />
+            <GradientStop Color="{StaticResource Tertiary}"
+                          Offset="1.0" />
+        </LinearGradientBrush>
+    </Border.Stroke>
+                <VerticalStackLayout Grid.Column="0" Margin="5">
+                    <HorizontalStackLayout>
+                        <Label Text="{Binding Review1.Value.User.Name}"></Label>
+                        <Image HeightRequest="40" WidthRequest="40" Source="{Binding Review1.Value.User.ImageUrl}"></Image>
+                    </HorizontalStackLayout>
+                    <Label Text="{Binding Review1.Value.TimeCreated}"></Label>
+                    <Label Text="{Binding Review1.Value.Rating}"></Label>
+                    <Label Text="{Binding Review1.Value.Text}" LineBreakMode="WordWrap"></Label>
+                </VerticalStackLayout>
+                </Border>
+                <VerticalStackLayout Grid.Column="1" Margin="5">
+                    <HorizontalStackLayout>
+                        <Label Text="{Binding Review2.Value.User.Name}"></Label>
+                        <Image HeightRequest="40" WidthRequest="40" Source="{Binding Review2.Value.User.ImageUrl}"></Image>
+                    </HorizontalStackLayout>
+                    <Label Text="{Binding Review2.Value.TimeCreated}"></Label>
+                    <Label Text="{Binding Review2.Value.Rating}"></Label>
+                    <Label Text="{Binding Review2.Value.Text}" ></Label>
+                </VerticalStackLayout>
+                <Border Grid.Column="2" StrokeThickness="4"
+                        StrokeShape="RoundRectangle 5,0,0,5"
+                        Background="{StaticResource Secondary}"
+        HorizontalOptions="Center">
+    <Border.Stroke>
+        <LinearGradientBrush EndPoint="0,1">
+            <GradientStop Color="{StaticResource Primary}"
+                          Offset="0.1" />
+            <GradientStop Color="{StaticResource Tertiary}"
+                          Offset="1.0" />
+        </LinearGradientBrush>
+    </Border.Stroke>
+                <VerticalStackLayout Grid.Column="2" Margin="5">
+                    <HorizontalStackLayout>
+                        <Label Text="{Binding Review3.Value.User.Name}"></Label>
+                        <Image HeightRequest="40" WidthRequest="40" Source="{Binding Review3.Value.User.ImageUrl}"></Image>
+                    </HorizontalStackLayout>
+                    <Label Text="{Binding Review3.Value.TimeCreated}"></Label>
+                    <Label Text="{Binding Review3.Value.Rating}"></Label>
+                    <Label Text="{Binding Review3.Value.Text}"></Label>
+                </VerticalStackLayout>
+                    </Border>
+            </Grid>
+    </Grid>
 </ContentPage>

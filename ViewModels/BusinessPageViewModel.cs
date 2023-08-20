@@ -5,12 +5,15 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Windows.Input;
 using Diner.Models;
+using Yelp.Api;
+using Yelp.Api.Models;
 
 namespace Diner.ViewModels
 {
 	public partial class BusinessPageViewModel : ObservableObject, IQueryAttributable
     {
         private Models.Business _business;
+        private readonly Client _client = new Client("3dtRAq-a2xkH053tcWiPHiKwDL31nT7ahkln0GGYED79t7V4b8GolZh3xNv9ctHmljcg8jlF9KadP0J_UZpmoesmxNJD_5KX6LPHOQjCtMdTSfYgfaDImF2xXTjiZHYx");
 
         public BusinessPageViewModel()
 		{
@@ -38,7 +41,9 @@ namespace Diner.ViewModels
         public ReactiveProperty<int> ReviewCount { get; set; } = new();
         public ReactiveProperty<string> Url { get; set; } = new();
         public ReactiveProperty<string> OpenOrClosed { get; set; } = new();
-
+        public ReactiveProperty<Review> Review1 { get; set; } = new();
+        public ReactiveProperty<Review> Review2 { get; set; } = new();
+        public ReactiveProperty<Review> Review3 { get; set; } = new();
 
         public Yelp.Api.Models.Category[] Categories { get; set; }
         public Yelp.Api.Models.Coordinates Coordinates { get; set; }
@@ -51,12 +56,16 @@ namespace Diner.ViewModels
         public AsyncReactiveCommand OpenWebsiteCommand { get; set; } = new();
         public AsyncReactiveCommand OpenMapsCommand { get; set; } = new();
 
-        void IQueryAttributable.ApplyQueryAttributes(IDictionary<string, object> query)
+        async void IQueryAttributable.ApplyQueryAttributes(IDictionary<string, object> query)
         {
             
             var b = query["business"] as Yelp.Api.Models.BusinessResponse;
             _business = Business.Load(b);
             RefreshProperties();
+            var reviews = await _client.GetReviewsAsync(Id);
+            Review1.Value = reviews.Reviews[0];
+            Review2.Value = reviews.Reviews[1];
+            Review3.Value = reviews.Reviews[2];
         }
 
         private async Task CallBusinessAsync()
@@ -93,6 +102,7 @@ namespace Diner.ViewModels
 
         private void RefreshProperties()
         {
+            Id = _business.Id;
             Name.Value = _business.Name;
             ImageUrl.Value = _business.ImageUrl;
             Phone.Value = _business.Phone;

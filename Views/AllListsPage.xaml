@@ -6,15 +6,16 @@
              Shell.NavBarIsVisible="False"
              NavigatedTo="ContentPage_NavigatedTo"
              BackgroundColor="{StaticResource Primary}">
-    <Grid>
+    <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="10*"></RowDefinition>
-            <RowDefinition Height="90*"></RowDefinition>
+            <RowDefinition Height="5*"></RowDefinition>
+            <RowDefinition Height="95*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Text="Your Lists" FontSize="Large" HorizontalTextAlignment="Center"></Label>
+        <Label Grid.Row="0" Text="Your Lists" FontSize="Title" FontFamily="OtomanopeeRegular" HorizontalTextAlignment="Center"></Label>
     <!-- Display notes in a list -->
         <CollectionView x:Name="listCollection"
                         ItemsSource="{Binding BusinessLists}"
+                        SelectionChanged="CollectionView_SelectionChanged"
                         Grid.Row="1"
                         Margin="10"
                         SelectionMode="Single"
@@ -24,14 +25,70 @@
 
         <!-- Designate how the collection of items are laid out -->
         <CollectionView.ItemsLayout>
-            <LinearItemsLayout Orientation="Vertical" ItemSpacing="20" />
+            <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
         </CollectionView.ItemsLayout>
 
         <!-- Define the appearance of each item in the list -->
         <CollectionView.ItemTemplate>
             <DataTemplate>
-                <Grid HeightRequest="50">
-                    <SwipeView VerticalOptions="Center" ios:SwipeView.SwipeTransitionMode="Drag">
+                <Grid HeightRequest="200">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60*"></RowDefinition>
+                        <RowDefinition Height="40*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="33*"/>
+                            <ColumnDefinition Width="33*"/>
+                            <ColumnDefinition Width="33*"/>
+                        </Grid.ColumnDefinitions>
+                        <Frame Grid.Column="0"
+                               HeightRequest="110"
+                               WidthRequest="110"
+                               HorizontalOptions="Center"
+                               IsClippedToBounds="True"
+                               Padding="0"
+                               BorderColor="Transparent"
+                               Margin="0,0,0,0">
+                            <Image
+                                Grid.Column="0"
+                                HeightRequest="120"
+                                WidthRequest="120"
+                                Source="{Binding FeaturedPhoto}"
+                                VerticalOptions="Center" />
+                        </Frame>
+                        <Frame Grid.Column="1"
+                               HeightRequest="110"
+                               WidthRequest="110"
+                               HorizontalOptions="Center"
+                               IsClippedToBounds="True"
+                               Padding="0"
+                               BorderColor="Transparent"
+                               Margin="0,0,0,0">
+                            <Image
+                                Grid.Column="0"
+                                HeightRequest="120"
+                                WidthRequest="120"
+                                Source="{Binding FeaturedPhoto2}"
+                                VerticalOptions="Center" />
+                        </Frame>
+                        <Frame Grid.Column="2"
+                               HeightRequest="110"
+                               WidthRequest="110"
+                               HorizontalOptions="Center"
+                               IsClippedToBounds="True"
+                               Padding="0"
+                               BorderColor="Transparent"
+                               Margin="0,0,0,0">
+                            <Image
+                                Grid.Column="0"
+                                HeightRequest="120"
+                                WidthRequest="120"
+                                Source="{Binding FeaturedPhoto3}"
+                                VerticalOptions="Center" />
+                        </Frame>
+                    </Grid>
+                    <SwipeView Grid.Row="1" VerticalOptions="Center" ios:SwipeView.SwipeTransitionMode="Drag">
                         <SwipeView.RightItems>
                             <SwipeItems>
                                 <SwipeItem Text="Delete"
@@ -41,7 +98,7 @@
                                            BackgroundColor="{StaticResource Secondary}"/> -->
                             </SwipeItems>
                         </SwipeView.RightItems>
-                        <VerticalStackLayout HeightRequest="50">
+                        <VerticalStackLayout HeightRequest="50" Spacing="5">
                             <Label VerticalOptions="Center" VerticalTextAlignment="Center" Text="{Binding ListName}" FontSize="22"/>
                             <HorizontalStackLayout Spacing="5">
                                 <Label Text="{Binding Businesses.Count}"/>

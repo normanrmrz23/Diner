@@ -4,21 +4,39 @@ using Diner.Framework;
 using Diner.Models;
 using Diner.Services;
 using Diner.Views;
+using Microsoft.Maui.Controls;
 using Reactive.Bindings;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows.Input;
 using Yelp.Api;
 using Yelp.Api.Models;
 
 namespace Diner.ViewModels;
 
-public class AllListsPageViewModel : ViewModelBase
+public class AllListsPageViewModel : ViewModelBase, INotifyPropertyChanged
 {
     private readonly IListLoader _listLoader;
     private readonly IListWriter _listWriter;
     private readonly IPopupService _popupService;
 
-    private readonly Client _client = new Client("IrsBbxZg4DcGnOIluEU_-Qk9y6U2lt4__1rHcAK2fCM6MSbaWZNBAtJzhd8rTciuJ2Q5WbWbi2U29DKlQOr5GhfiDx8_yS2YN4xaRYh8vhN_MG8OVkhWfkFAhLWVZHYx");
+    private readonly Client _client = new Client("3dtRAq-a2xkH053tcWiPHiKwDL31nT7ahkln0GGYED79t7V4b8GolZh3xNv9ctHmljcg8jlF9KadP0J_UZpmoesmxNJD_5KX6LPHOQjCtMdTSfYgfaDImF2xXTjiZHYx");
+
+    BusinessList selectedMonkey;
+    public BusinessList SelectedMonkey
+    {
+        get
+        {
+            return selectedMonkey;
+        }
+        set
+        {
+            if (selectedMonkey != value)
+            {
+                selectedMonkey = value;
+            }
+        }
+    }
 
     public List<string> _myList;
     public IEnumerable<string> _allLists;
@@ -27,6 +45,7 @@ public class AllListsPageViewModel : ViewModelBase
     public ObservableCollection<ListsPageViewModel> AllNotes { get; }
     public ReactiveCollection<BusinessResponse> Businesses { get; } = new();
     public ReactiveCollection<BusinessList> BusinessLists { get; } = new();
+    public ReactiveProperty<BusinessList> SelectedItem { get; set; } = new();
 
     public ReactiveCommand NewCommand { get; } = new();
     public ReactiveCommand SelectListCommand { get; } = new();
@@ -59,12 +78,17 @@ public class AllListsPageViewModel : ViewModelBase
             var bl = new BusinessList();
             bl.Businesses = new();
             var listData = await _listLoader.LoadAsync(list);
-            foreach (string id in listData)
+            foreach(string id in listData)
             {
                 var business = await _client.GetBusinessAsync(id);
                 bl.Businesses.Add(business);
             }
             bl.ListName = list;
+            bl.FeaturedPhoto = bl.Businesses.FirstOrDefault().ImageUrl;
+            var second = bl.Businesses.ElementAtOrDefault(1);
+            if (second != null)
+                bl.FeaturedPhoto2 = second.ImageUrl;
+            bl.FeaturedPhoto3 = bl.Businesses.LastOrDefault().ImageUrl;
             BusinessLists.Add(bl);
         }
     }
@@ -80,6 +104,8 @@ public class AllListsPageViewModel : ViewModelBase
 
     private async Task SelectListAsync(object list)
     {
+        if (list == null)
+            return;
         AllLists = await _listLoader.LoadAllListsAsync(); //temp fix to reload lists when we come back to this page
         Businesses.Clear();
         var listData = await _listLoader.LoadAsync(list as string);

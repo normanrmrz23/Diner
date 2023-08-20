@@ -88,13 +88,13 @@
                 <DataTemplate> 
                     <Grid HeightRequest="70" Padding="10" ColumnSpacing="10">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="10*"></ColumnDefinition>
+                            <ColumnDefinition Width="15*"></ColumnDefinition>
                             <ColumnDefinition Width="80*"></ColumnDefinition>
-                            <ColumnDefinition Width="10*"></ColumnDefinition>
+                            <ColumnDefinition Width="5*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Frame Grid.Column="0"
-                               HeightRequest="45"
-                               WidthRequest="45"
+                               HeightRequest="60"
+                               WidthRequest="60"
                                HorizontalOptions="Center"
                                IsClippedToBounds="True"
                                Padding="0"
@@ -131,10 +131,10 @@
                     </HorizontalStackLayout>
                     -->
              
-                        <ImageButton Grid.Column="2" HeightRequest="20" WidthRequest="20" HorizontalOptions="End"
+                        <ImageButton Grid.Column="2" HeightRequest="30" WidthRequest="30" HorizontalOptions="End" 
                                      Command="{Binding  Path= BindingContext.AddToListCommand,Source={Reference businessCollection }}"  CommandParameter="{Binding .}">
                             <ImageButton.Source>
-                                <FontImageSource FontFamily="FontAwesomeSolid" Color="{StaticResource Tertiary}" Size="50" Glyph="{StaticResource plus}"/>  
+                                <FontImageSource FontFamily="FontAwesomeSolid" Color="{StaticResource Tertiary}" Size="250" Glyph="{StaticResource plus}"/>  
                             </ImageButton.Source>
 
                         </ImageButton>

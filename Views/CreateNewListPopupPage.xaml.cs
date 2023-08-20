@@ -9,6 +9,6 @@ public partial class CreateNewListPopupPage : Popup
 	{
 		InitializeComponent();
 		BindingContext = viewModel;
-        Size = new(300, 500);
+        Size = new(300, 250);
     }
 }
