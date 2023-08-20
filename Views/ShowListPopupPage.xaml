@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup
+	x:Class="Diner.Views.ShowListPopupPage"
+	xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+	xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+	Color="{StaticResource Primary}" >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"></RowDefinition>
+            <RowDefinition Height="90*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Text="{Binding BusinessList.ListName}" FontSize="Large" HorizontalTextAlignment="Center"></Label>
+    <!-- Display notes in a list -->
+        <CollectionView x:Name="listCollection"
+                        ItemsSource="{Binding BusinessList.Businesses}"
+                        Grid.Row="1"
+                        Margin="10"
+                        SelectionMode="Single"
+                        SelectionChangedCommand="{Binding SelectListCommand}"
+                        SelectionChangedCommandParameter="{Binding Source={RelativeSource Self}, Path=SelectedItem}">
+
+
+        <!-- Designate how the collection of items are laid out -->
+        <CollectionView.ItemsLayout>
+            <LinearItemsLayout Orientation="Vertical" ItemSpacing="20" />
+        </CollectionView.ItemsLayout>
+
+        <!-- Define the appearance of each item in the list -->
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <Grid HeightRequest="50">
+                    <SwipeView VerticalOptions="Center" ios:SwipeView.SwipeTransitionMode="Drag">
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <SwipeItem Text="Delete"
+                                           BackgroundColor="Red"
+                                           Command="{Binding  Path= BindingContext.DeleteListCommand,Source={Reference listCollection }}"  CommandParameter="{Binding .}"/>
+                           <!--     <SwipeItem Text="Share"
+                                           BackgroundColor="{StaticResource Secondary}"/> -->
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+                        <VerticalStackLayout HeightRequest="50">
+                            <Label VerticalOptions="Center" VerticalTextAlignment="Center" Text="{Binding Name}" FontSize="22"/>
+                        </VerticalStackLayout>
+                    </SwipeView>
+                </Grid>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</mct:Popup>
