@@ -11,6 +11,8 @@ namespace Diner.Services
         Task WriteFileAsync(string filename, List<string> allLines, string writeDirectory);
         OkFailResult WriteFile(string filename, List<string> allLines, string writeDirectory);
         bool FileExists(string filename, string directory);
+        public OkFailResult AppendToExistingFile(string filename, List<string> allLines, string path);
+        public OkFailResult DeleteFile(string filename, string path);
     }
 
     public class FileDb : IFileDb
@@ -165,6 +167,27 @@ namespace Diner.Services
                     throw;
                 }
             }
+        }
+
+        public OkFailResult AppendToExistingFile(string filename, List<string> allLines, string path)
+        {
+            if (filename != null && path != null && allLines != null)
+            {
+                if (!_systemIoDirectory.Exists(path))
+                    return OkFailResult.Fail($"Error writing file to {path}");
+
+                var filePath = Path.Combine(path, filename);
+                File.AppendAllLines(filePath, allLines);
+            }
+            return OkFailResult.Ok();
+
+        }
+
+        public OkFailResult DeleteFile(string filename, string path)
+        {
+            var filePath = Path.Combine(path, filename);
+            _systemIoFile.Delete(filePath);
+            return OkFailResult.Ok();
         }
 
         public bool FileExists(string filename, string directory)

@@ -13,7 +13,7 @@ namespace Diner.ViewModels
         private readonly IListLoader _listLoader;
         private readonly IPopupService _popupService;
 
-        private Action<bool> _closeCommand;
+        private Action _closeCommand;
         private CreateNewListPopupPage _popup;
 
         public ReactiveProperty<string> ListName { get; set; } = new();
@@ -26,12 +26,14 @@ namespace Diner.ViewModels
         BusinessResponse business,
         IListWriter listWriter,
         IListLoader listLoader,
-        IPopupService popupService
+        IPopupService popupService,
+        Action closeCommand
         )
 		{
             _listWriter = listWriter;
             _listLoader = listLoader;
             _popupService = popupService;
+            _closeCommand = closeCommand;
 
             Business = business;
 
@@ -47,6 +49,7 @@ namespace Diner.ViewModels
         private async Task SaveAndCreateNewList()
         {
             await _listWriter.WriteAsync(ListName.Value, Business);
+            _closeCommand();
         }
     }
 }

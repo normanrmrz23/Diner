@@ -4,6 +4,10 @@ using Diner.Models;
 using Diner.Framework;
 using Diner.Services;
 using Diner.Views;
+using Yelp.Api;
+using System;
+using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Maui.Alerts;
 
 namespace Diner.ViewModels
 {
@@ -14,6 +18,7 @@ namespace Diner.ViewModels
         private readonly IPopupService _popupService;
         private AddToListPopupPage _popup;
         private CreateNewListPopupPage _newPopup;
+        private readonly Client _client = new Client("IrsBbxZg4DcGnOIluEU_-Qk9y6U2lt4__1rHcAK2fCM6MSbaWZNBAtJzhd8rTciuJ2Q5WbWbi2U29DKlQOr5GhfiDx8_yS2YN4xaRYh8vhN_MG8OVkhWfkFAhLWVZHYx");
 
         Data database;
         public ReactiveCollection<BusinessResponse> Businesses { get; } = new();
@@ -37,29 +42,31 @@ namespace Diner.ViewModels
             RefreshCommand.Subscribe(async _ => await FindAsync());
             SelectBusinessCommand.Subscribe(OpenBusiness);
             AddToListCommand.Subscribe(async business => await ShowAddToListPopup(business));
+         //   SearchTerm.Subscribe(async _ => await AutoCompleteAsync());
             FindAsync();
         }
 
-        private async Task ShowAddToListPopup(object business)
+        private async Task AutoCompleteAsync()
         {
-            async void action(bool result)
+            await GetCurrentLocation();
+            var response = await _client.AutocompleteAsync(SearchTerm.Value, UserLocation.Latitude, UserLocation.Longitude);
+            AutoCompleteBusinessList(response);
+        }
+
+        private void AutoCompleteBusinessList(AutocompleteResponse response)
+        {
+            Businesses.Clear();
+            foreach (BusinessResponse business in response.Businesses)
             {
-                _popup.Close(result);
-                await Task.Delay(400);
-                if (result)
-                {
-                    _newPopup = new CreateNewListPopupPage(new CreateNewListPopupPageViewModel(business as BusinessResponse, _listWriter, _listLoader, _popupService));
-                    await _popupService.ShowPopupAsync(_newPopup);
-                }
+                Businesses.Add(business);
             }
-            _popup = new AddToListPopupPage(new AddToListPopupPageViewModel(business as BusinessResponse, _listWriter, _listLoader, _popupService, action));
-            var result = await _popupService.ShowPopupAsync(_popup);
         }
 
         private async Task FindAsync()
         {
             IsRefreshing.Value = true;
             Businesses.Clear();
+
             var request = new SearchRequest();
             await GetCurrentLocation();
             request.Latitude = UserLocation.Latitude;
@@ -67,13 +74,20 @@ namespace Diner.ViewModels
             request.Term = SearchTerm.Value;
             request.MaxResults = 40;
             request.SortBy = "distance";
-            //filter out non restaurants
-            var client = new Yelp.Api.Client("IrsBbxZg4DcGnOIluEU_-Qk9y6U2lt4__1rHcAK2fCM6MSbaWZNBAtJzhd8rTciuJ2Q5WbWbi2U29DKlQOr5GhfiDx8_yS2YN4xaRYh8vhN_MG8OVkhWfkFAhLWVZHYx");
-            var results = await client.SearchBusinessesAllAsync(request);
-            foreach (BusinessResponse business in results.Businesses) {
+            request.Categories = "restaurants";
+
+            var results = await _client.SearchBusinessesAllAsync(request);
+
+            UpdateBusinessList(results);
+            IsRefreshing.Value = false;
+        }
+
+        private void UpdateBusinessList(SearchResponse results)
+        {
+            foreach (BusinessResponse business in results.Businesses)
+            {
                 Businesses.Add(business);
             }
-            IsRefreshing.Value = false;
         }
 
         private async Task OpenBusiness(object business)
@@ -85,6 +99,36 @@ namespace Diner.ViewModels
                 { "business", business }
             };
             await Shell.Current.GoToAsync($"{nameof(Views.BusinessPage)}", navigationParameter);
+        }
+
+
+        private async Task ShowAddToListPopup(object business)
+        {
+            async void action(bool result)
+            {
+                _popup.Close(result);
+                await Task.Delay(400);
+                if (result)
+                {
+                    async void close()
+                    {
+                        _newPopup.Close();
+                    }
+                    _newPopup = new CreateNewListPopupPage(new CreateNewListPopupPageViewModel(business as BusinessResponse, _listWriter, _listLoader, _popupService, close));
+                    await _popupService.ShowPopupAsync(_newPopup);
+                }
+                CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+
+                string text = "Added to List";
+                ToastDuration duration = ToastDuration.Short;
+                double fontSize = 14;
+
+                var toast = Toast.Make(text, duration, fontSize);
+
+                await toast.Show(cancellationTokenSource.Token);
+            }
+            _popup = new AddToListPopupPage(new AddToListPopupPageViewModel(business as BusinessResponse, _listWriter, _listLoader, _popupService, action));
+            var result = await _popupService.ShowPopupAsync(_popup);
         }
 
         public async Task<string> GetCachedLocation()

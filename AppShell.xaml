@@ -7,10 +7,10 @@
     Shell.FlyoutBehavior="Disabled"
     Shell.BackgroundColor="{StaticResource Secondary}"
     Shell.ForegroundColor="{StaticResource Tertiary}"
-    Shell.TabBarBackgroundColor="{StaticResource Secondary}"
-    Shell.TabBarForegroundColor="{StaticResource Primary}"
-    Shell.TabBarDisabledColor="{StaticResource Tertiary}"
-    Shell.TabBarUnselectedColor="{StaticResource Tertiary}">
+    Shell.TabBarBackgroundColor="{StaticResource Primary}"
+    Shell.TabBarForegroundColor="{StaticResource Tertiary}"
+    Shell.TabBarDisabledColor="{StaticResource Secondary}"
+    Shell.TabBarUnselectedColor="{StaticResource Secondary}">
     
     <TabBar>
         <ShellContent

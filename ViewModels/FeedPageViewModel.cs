@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace Diner.ViewModels;
 
-internal class FeedPageViewModel
+public class FeedPageViewModel
 {
    
 }

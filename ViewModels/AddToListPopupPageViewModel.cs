@@ -44,18 +44,13 @@ namespace Diner.ViewModels
 		{
             var b = Business;
             //MyList.Businesses.Add(b);
-            await _listWriter.WriteAsync(listName as string, b);
-            CloseCommand(true);
+            _listWriter.WriteExisting(listName as string, b);
+            CloseCommand(false);
         }
 
         private void CloseCommand(bool result)
         {
             _closeCommand(result);
-        }
-
-        private Task SaveToSpecifiedList(object business)
-        {
-            throw new NotImplementedException();
         }
 
         private async Task SaveToNewList(object business)

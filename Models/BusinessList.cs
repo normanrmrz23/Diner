@@ -12,7 +12,8 @@ namespace Diner.Models
 
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
-		public ReactiveCollection<Yelp.Api.Models.BusinessResponse> Businesses { get; set; }
+		public string ListName { get; set; }
+		public List<Yelp.Api.Models.BusinessResponse> Businesses { get; set; }
     }
 }
 

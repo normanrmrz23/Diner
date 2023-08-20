@@ -9,6 +9,8 @@ namespace Diner.Services
     public interface IListWriter
     {
         Task<OkFailResult> WriteAsync(string filename, BusinessResponse business);
+        OkFailResult WriteExisting(string filename, BusinessResponse business);
+        OkFailResult DeleteExisting(string filename);
     }
     public class ListWriter : IListWriter
 	{
@@ -35,18 +37,9 @@ namespace Diner.Services
             {
                 try
                 {
-                    //Logger.Debug("=== GenerateAndSaveFile Processing {IsNot} On MainThread ===", _mainThread.IsMainThread ? "Is" : "Not");
-
-                    var infoFileLines = new List<string> { "Start List" };
+                    var infoFileLines = new List<string>();
                     AddInfoLines(business, infoFileLines);
 
-
-                    // Count is 1 less than the count because we have 1 placeholder.
-                   // ciSurveyFileLines.Add(string.Format(_provider, "{0} = {1}:", SurveyOptionsFileStrings.Records, ciReadings.Length - 1));
-
-
-                    //AddReadingLines(ciReadings, ciSurveyFileLines);
-                    infoFileLines.Add("End");
                     var path = FileSystem.Current.AppDataDirectory;
                     var fullPath = Path.Combine(path, filename);
                     File.WriteAllLines(fullPath, infoFileLines);
@@ -64,10 +57,31 @@ namespace Diner.Services
             return retCode;
         }
 
+        public OkFailResult WriteExisting(string filename, BusinessResponse business)
+        {
+            var retCode = OkFailResult.Ok();
+            try
+            {
+                var infoFileLines = new List<string>();
+                AddInfoLines(business, infoFileLines);
+                _fileDb.AppendToExistingFile(filename, infoFileLines, _listsDirectoryPath);
+            }
+            catch(Exception e)
+            {
+                retCode = OkFailResult.Fail(e.Message);
+            }
+            return retCode;
+        }
+
+        public OkFailResult DeleteExisting(string filename)
+        {
+            _fileDb.DeleteFile(filename, _listsDirectoryPath);
+            return OkFailResult.Ok();
+        }
         protected virtual void AddInfoLines(BusinessResponse businessResponse, List<string> infoLines)
 		{
-            var infoLineFormatString = "{0} = {1}";
-			infoLines.Add(string.Format(_provider, infoLineFormatString, "Name", businessResponse.Name));
+            var infoLineFormatString = "{0}";
+			infoLines.Add(string.Format(_provider, infoLineFormatString, businessResponse.Id));
         }
 
 

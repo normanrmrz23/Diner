@@ -34,7 +34,7 @@ namespace Diner.Services
             if (_fileDb.FileExists(filename, _listsDirectoryPath))
             {
                 var allLines = await _fileDb.ReadFileAsync(filename, _listsDirectoryPath);
-                for (int i = 1; i < allLines.Count - 1;i++)
+                for (int i = 0; i < allLines.Count; i++)
                 {
                     businesses.Add(allLines[i]);
                 }

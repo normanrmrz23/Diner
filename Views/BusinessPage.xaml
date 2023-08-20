@@ -25,6 +25,8 @@
             <Image
                 Grid.Row="0"
                 Grid.RowSpan="2"
+                HeightRequest="550"
+                WidthRequest="550"
                 Source="{Binding ImageUrl.Value}"
                 VerticalOptions="Center" />
             
