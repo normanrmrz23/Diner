@@ -67,11 +67,11 @@ public class AllListsPageViewModel : ViewModelBase, INotifyPropertyChanged
         SelectListCommand.Subscribe(async _ => await SelectListAsync(_));
         LoadListsCommand.Subscribe(async _ => await LoadListsAsync());
         DeleteListCommand.Subscribe(DeleteList);
-        LoadListsAsync();
     }
 
     private async Task LoadListsAsync()
     {
+        BusinessLists.Clear();
         AllLists = await _listLoader.LoadAllListsAsync();
         foreach(string list in AllLists)
         {

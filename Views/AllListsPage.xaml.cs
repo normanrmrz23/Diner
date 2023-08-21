@@ -13,6 +13,8 @@ public partial class AllListsPage : ContentPage
     private void ContentPage_NavigatedTo(object sender, NavigatedToEventArgs e)
     {
         listCollection.SelectedItem = null;
+        var vm = (AllListsPageViewModel)this.BindingContext;
+        vm.LoadListsCommand.Execute();
     }
 
     private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
